@@ -21,3 +21,8 @@ To run all tests:
 ```bash
 npm test
 ```
+
+## Bonuses
+- Added handler using `addLocatorHandler` to catch when ad showed and close it.
+- Added `prettier` for code formatting
+- Added `chance` library to generate random test data

@@ -54,6 +54,16 @@ test.describe("E2E: User flows", () => {
     await expect(mainShopPage.getHeaderComponent().getCreateAccountBtn).toBeVisible();
   });
 
+  test("should NOT allow user to sign in with wrong credentials", async ({ page }) => {
+    existedUserInfo.password = "passworD!";
+    const mainShopPage = new HomeShopPage(page);
+    await mainShopPage.open();
+    const signInPage = await mainShopPage.getHeaderComponent().navigateToSignIn();
+    await signInPage.signInUser(existedUserInfo);
+
+    await expect(signInPage.getErrorMessage).toContainText("The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.");
+  });
+
   test("should allow user to sign in and search for product, add and remove it from cart", async ({ page }) => {
     const mainShopPage = new HomeShopPage(page);
     await mainShopPage.open();
